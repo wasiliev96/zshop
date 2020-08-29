@@ -109,7 +109,7 @@
         <div class="absolute bottom-0 left-0 details">
           <div class="flex flex-col items-center p-4 mb-3 details_size">
             <div class="text-xl font-bold leading-none uppercase size-value">
-              {{ item.size }} UK
+              {{ item.sizeUK }} UK
             </div>
             <span class="size_description">размер</span>
           </div>

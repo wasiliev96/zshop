@@ -8,7 +8,7 @@ export default new Vuex.Store({
     saleItems: [],
     currentItemId: null,
     cart: {
-      itemsId: [],
+      items: [],
       value: null
     }
   },
