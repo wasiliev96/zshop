@@ -1,32 +1,38 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+  <div id="app" class="app">
+    <TheHeader></TheHeader>
+    <router-view class="mx-0 mt-3 sm:mx-5 page z-0" />
+    <NavigationBar></NavigationBar>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+<style scoped lang="scss">
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 </style>
+<script>
+import TheHeader from "@/components/TheHeader";
+import NavigationBar from "@/components/NavigationBar";
+import axios from "axios";
+export default {
+  components: {
+    TheHeader: TheHeader,
+    NavigationBar: NavigationBar
+  },
+  data() {
+    return {};
+  },
+  created() {
+    this.$store.dispatch("loadData");
+    console.log("store:");
+    console.table(this.$store.state.saleItems);
+
+    axios.get("http://localhost:1337/sale-items").then(response => {
+      this.itemsList = response.data;
+      console.log(this.itemsList);
+    });
+  }
+};
+</script>
