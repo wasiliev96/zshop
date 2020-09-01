@@ -4,6 +4,7 @@ import IconHanger from "@/components/icons/IconHanger";
 import IconHeart from "@/components/icons/IconHeart";
 import IconHome from "@/components/icons/IconHome";
 import IconLogo from "@/components/icons/IconLogo";
+import IconCash from "@/components/icons/IconCash";
 
 export default {
   IconBurger,
@@ -11,5 +12,6 @@ export default {
   IconHanger,
   IconHeart,
   IconHome,
-  IconLogo
+  IconLogo,
+  IconCash
 };

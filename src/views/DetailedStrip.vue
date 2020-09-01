@@ -153,9 +153,10 @@ export default {
       if (going === this.$waypointMap.GOING_IN) {
         // console.log('waypoint going in!')
         if (el.id) {
-          this.$store.state.currentItemId = el.id;
+          // this.$store.state.currentItemId = el.id;
+          this.$store.commit("setCurrentItem", el);
         }
-        // console.log(`current card: ${this.$store.state.currentItemId}`)
+        console.log(`current card: ${this.$store.state.currentItemId}`);
       }
 
       if (direction === this.$waypointMap.DIRECTION_TOP) {

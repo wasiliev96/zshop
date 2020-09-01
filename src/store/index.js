@@ -26,16 +26,13 @@ export default new Vuex.Store({
       if (index > -1) {
         state.cart.itemsId.splice(index, 1);
       }
-    }
-  },
-  getters: {
-    currentItem: state => {
-      return state.currentItemId;
     },
-    cart: state => {
-      return state.cart;
+    setCurrentItem(state, item) {
+      state.currentItemId = item.id;
+      console.log("setted");
     }
   },
+  getters: {},
   actions: {
     loadData({ commit }) {
       axios
