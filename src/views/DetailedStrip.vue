@@ -133,6 +133,7 @@
 </template>
 
 <script>
+// import router from "@/router";
 import { VueAgile } from "vue-agile";
 export default {
   name: "DetailedStrip",
@@ -155,6 +156,10 @@ export default {
         if (el.id) {
           // this.$store.state.currentItemId = el.id;
           this.$store.commit("setCurrentItem", el);
+          if (this.$route.params.id !== el.id) {
+            // router.push({ name: "DetailedStrip", params: { id: el.id } });
+            history.replaceState({}, "", el.id);
+          }
         }
         console.log(`current card: ${this.$store.state.currentItemId}`);
       }
