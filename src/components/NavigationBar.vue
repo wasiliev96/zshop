@@ -27,8 +27,13 @@
           class="relative w-20 h-20 mx-1 overflow-hidden bg-white shadow-inner btn-cta focus:outline-none cursor-auto"
           :class="{
             collapsed:
-              this.$route.name !== 'Cart' &&
-              this.$route.name !== 'DetailedStrip'
+              (this.$route.name !== 'Cart' &&
+                this.$route.name !== 'DetailedStrip' &&
+                this.$store.state.saleItems[
+                  this.$store.state.currentItemId - 1
+                ]) ||
+              !this.$store.state.saleItems[this.$store.state.currentItemId - 1]
+                .isForSale
           }"
         >
           <button
@@ -41,7 +46,7 @@
             class="absolute top-0 left-0 w-full h-full "
             :class="{ cta_collapsed: this.$route.name !== 'DetailedStrip' }"
           >
-            <icon-cart></icon-cart>
+            <icon-cart add></icon-cart>
           </button>
         </div>
         <router-link
@@ -154,15 +159,14 @@ export default {
     "icon-cash": icons.IconCash
   },
   computed: {
-    ctaVisible() {
-      // return this.activeView !== "Cart" && this.activeView !== "DetailedStrip";
-      return true;
-    },
     activeView() {
       return this.$route.name;
     },
-    currentRouteName() {
-      return this.$route.name;
+    isCurrentItemForSale() {
+      return (
+        this.$store.state.saleItems[this.$store.state.currentItemId - 1].id ===
+        1
+      );
     }
   },
   created() {}

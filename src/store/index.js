@@ -6,10 +6,10 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     saleItems: [],
-    currentItemId: null,
+    currentItemId: 1,
     cart: {
       items: [],
-      value: null
+      value: 0
     }
   },
   mutations: {
@@ -28,11 +28,15 @@ export default new Vuex.Store({
       }
     },
     setCurrentItem(state, item) {
-      state.currentItemId = item.id;
+      state.currentItemId = +item.id;
       console.log("setted");
     }
   },
-  getters: {},
+  getters: {
+    currentItemId(state) {
+      return state.currentItemId;
+    }
+  },
   actions: {
     loadData({ commit }) {
       axios
