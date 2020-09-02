@@ -27,13 +27,14 @@
           class="relative w-20 h-20 mx-1 overflow-hidden bg-white shadow-inner btn-cta focus:outline-none cursor-auto"
           :class="{
             collapsed:
-              (this.$route.name !== 'Cart' &&
-                this.$route.name !== 'DetailedStrip' &&
-                this.$store.state.saleItems[
+              (this.$route.name !== 'DetailedStrip' &&
+                this.$route.name !== 'Cart') ||
+              (this.$store.state.saleItems[
+                this.$store.state.currentItemId - 1
+              ] &&
+                !this.$store.state.saleItems[
                   this.$store.state.currentItemId - 1
-                ]) ||
-              !this.$store.state.saleItems[this.$store.state.currentItemId - 1]
-                .isForSale
+                ].isForSale)
           }"
         >
           <button
@@ -44,7 +45,13 @@
           </button>
           <button
             class="absolute top-0 left-0 w-full h-full "
-            :class="{ cta_collapsed: this.$route.name !== 'DetailedStrip' }"
+            :class="{
+              cta_collapsed:
+                this.$route.name !== 'DetailedStrip' ||
+                !this.$store.state.saleItems[
+                  this.$store.state.currentItemId - 1
+                ].isForSale
+            }"
           >
             <icon-cart add></icon-cart>
           </button>
