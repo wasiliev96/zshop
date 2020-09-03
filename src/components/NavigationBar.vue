@@ -44,6 +44,7 @@
                   this.$store.state.currentItemId - 1
                 ].isForSale
             }"
+            @click="addThisToCart()"
           >
             <icon-cart add></icon-cart>
           </button>
@@ -156,6 +157,13 @@ export default {
     "icon-cart": icons.IconCart,
     "icon-burger": icons.IconBurger,
     "icon-cash": icons.IconCash
+  },
+  methods: {
+    addThisToCart() {
+      this.$store.commit("addToCart", this.$store.state.currentItemId);
+      console.log(`item id ${this.$store.state.currentItemId} added to cart`);
+      console.table(this.$store.state.cart.items);
+    }
   },
   computed: {
     activeView() {

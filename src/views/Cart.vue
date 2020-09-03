@@ -3,7 +3,7 @@
     <h1>{{ this.$route.name }}</h1>
     <div
       class=" cart-card my-5"
-      v-for="(item, index) in this.$store.state.saleItems"
+      v-for="(item, index) in cartItems"
       v-bind:key="index"
     >
       <div class="flex w-10/12 md:w-5/6 mx-auto card-inner">
@@ -66,7 +66,27 @@
 
 <script>
 export default {
-  name: "Cart"
+  name: "Cart",
+  data() {
+    return {
+      cartItems: []
+    };
+  },
+  mounted() {
+    const saleItems = this.$store.state.saleItems;
+    this.cartItems = saleItems.filter(saleItem =>
+      this.$store.state.cart.items.includes(saleItem.id)
+    );
+    // saleItems.forEach(item => {
+    //   if (this.$store.state.cart.items.includes(item.id)) {
+    //     this.cartItems.push(item);
+    //   }
+    // });
+    console.log("cart items");
+    console.table(this.$store.state.cart.items);
+    console.log("this cart items");
+    console.table(this.cartItems);
+  }
 };
 </script>
 

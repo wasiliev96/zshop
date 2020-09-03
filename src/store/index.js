@@ -16,15 +16,15 @@ export default new Vuex.Store({
     updatePosts(state, data) {
       state.saleItems = data;
     },
-    addToCart(state, item) {
-      if (state.cart.itemsId.includes(item.id)) {
-        state.cart.itemsId.push(item.id);
+    addToCart(state, id) {
+      if (state.saleItems.filter(item => item.id === id)) {
+        state.cart.items.push(id);
       }
     },
     removeFromCart(state, item) {
-      const index = state.cart.itemsId.indexOf(item.id);
+      const index = state.cart.items.indexOf(item.id);
       if (index > -1) {
-        state.cart.itemsId.splice(index, 1);
+        state.cart.items.splice(index, 1);
       }
     },
     setCurrentItem(state, item) {
