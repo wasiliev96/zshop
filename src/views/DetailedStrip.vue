@@ -8,7 +8,7 @@
     <!--    </agile>-->
     <div
       class="h-full border-2 card"
-      v-for="(item, index) in this.$store.state.saleItems"
+      v-for="(item, index) in items"
       v-bind:key="index"
       v-waypoint="{
         active: true,
@@ -146,9 +146,11 @@ export default {
       intersectionOptions: {
         root: null,
         threshold: [0.75, 0.75]
-      }
+      },
+      items: this.$store.state.saleItems
     };
   },
+  computed: {},
   methods: {
     onWaypoint({ el, going, direction }) {
       if (going === this.$waypointMap.GOING_IN) {
@@ -169,6 +171,7 @@ export default {
       }
     }
   },
+
   mounted() {
     const elem = document.getElementById(this.$route.params.id);
     elem.scrollIntoView();

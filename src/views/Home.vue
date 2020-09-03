@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <ThumbnailCard
-      v-for="(item, index) in this.$store.state.saleItems"
+      v-for="(item, index) in items"
       v-bind:key="index"
       :item="item"
     ></ThumbnailCard>
@@ -18,9 +18,22 @@ export default {
   data() {
     return {};
   },
-  created() {
+  mounted() {
     console.log("downloaded data:");
     console.log(this.$store.state.saleItems);
+  },
+  computed: {
+    items: function() {
+      const filters = this.$store.state.saleItems.map(a => a.type);
+      if (this.$route.path === "/all") {
+        return this.$store.state.saleItems;
+      } else if (filters.includes(this.$route.params["filter"])) {
+        return this.$store.state.saleItems.filter(
+          item => item.type === this.$route.params["filter"]
+        );
+      }
+      return this.$store.state.saleItems;
+    }
   }
 };
 </script>

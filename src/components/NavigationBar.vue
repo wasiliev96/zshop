@@ -26,15 +26,7 @@
         <div
           class="relative w-20 h-20 mx-1 overflow-hidden bg-white shadow-inner btn-cta focus:outline-none cursor-auto"
           :class="{
-            collapsed:
-              (this.$route.name !== 'DetailedStrip' &&
-                this.$route.name !== 'Cart') ||
-              (this.$store.state.saleItems[
-                this.$store.state.currentItemId - 1
-              ] &&
-                !this.$store.state.saleItems[
-                  this.$store.state.currentItemId - 1
-                ].isForSale)
+            collapsed: isCtaVisible
           }"
         >
           <button
@@ -87,7 +79,7 @@
               @click="activeMenuIndex = null"
             >
               <router-link
-                :to="'#'"
+                :to="{ name: 'Home', params: { filter: item.slug } }"
                 v-text="item.title"
                 class="flex py-3 pl-2"
               ></router-link>
@@ -109,51 +101,51 @@ export default {
       menuLinks: [
         {
           title: "Верхняя одежда",
-          href: "Home"
+          slug: "outfit"
         },
         {
           title: "Платья",
-          href: "Home"
+          slug: "dresses"
         },
         {
           title: "Юбки",
-          href: "Home"
+          slug: "skirts"
         },
         {
           title: "Шорты",
-          href: "Home"
+          slug: "shorts"
         },
         {
           title: "Штаны",
-          href: "Home"
+          slug: "pants"
         },
         {
           title: "Футболки, майки",
-          href: "Home"
+          slug: "t-shirts"
         },
         {
           title: "Блузы",
-          href: "Home"
+          slug: "blouses"
         },
         {
           title: "Кофты",
-          href: "Home"
+          slug: "sweaters"
         },
         {
           title: "Комбинезоны",
-          href: "Home"
+          slug: "overalls"
         },
         {
           title: "Комплекты",
-          href: "Home"
+          slug: "kits"
         },
         {
           title: "Аксессуары",
-          href: "Home"
+          slug: "accessories"
         },
         {
           title: "Обувь",
-          href: "Home"
+          slug: "shoes"
         }
       ]
     };
@@ -168,6 +160,14 @@ export default {
   computed: {
     activeView() {
       return this.$route.name;
+    },
+    isCtaVisible() {
+      return (
+        (this.$route.name !== "DetailedStrip" && this.$route.name !== "Cart") ||
+        (this.$store.state.saleItems[this.$store.state.currentItemId - 1] &&
+          !this.$store.state.saleItems[this.$store.state.currentItemId - 1]
+            .isForSale)
+      );
     },
     isCurrentItemForSale() {
       return (

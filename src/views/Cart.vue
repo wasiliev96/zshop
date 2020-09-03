@@ -1,5 +1,6 @@
 <template>
   <div class="pt-2 cart bg-main">
+    <h1>{{ this.$route.name }}</h1>
     <div
       class=" cart-card my-5"
       v-for="(item, index) in this.$store.state.saleItems"
